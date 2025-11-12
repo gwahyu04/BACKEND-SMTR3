@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Pengembalian Mobil</h2>
+<p>Berikut daftar mobil yang sedang disewa dan belum dikembalikan:</p>
+
+<table border="1" cellpadding="8" cellspacing="0">
+    <tr>
+        <th>ID Rental</th>
+        <th>Nama Mobil</th>
+        <th>Pelanggan</th>
+        <th>Tanggal Pinjam</th>
+        <th>Tanggal Kembali</th>
+        <th>Total Harga</th>
+        <th>Aksi</th>
+    </tr>
+
+    {% if rental %}
+        {% for r in rental %}
+        <tr>
+            <td>{{ r[0] }}</td>
+            <td>{{ r[1] }}</td>
+            <td>{{ r[2] }}</td>
+            <td>{{ r[3] }}</td>
+            <td>{{ r[4] }}</td>
+            <td>{{ r[5] | rupiah }}</td>
+            <td>
+                <a href="{{ url_for('kembalikan', id=r[0]) }}" class="btn">Kembalikan Sekarang</a>
+            </td>
+        </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="7" style="text-align:center;">Semua mobil sudah dikembalikan 🎉</td>
+        </tr>
+    {% endif %}
+</table>
+
+{% endblock %}

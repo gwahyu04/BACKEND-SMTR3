@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Data Mobil</h2>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Foto</th>
+        <th>Nama Mobil</th>
+        <th>Merk</th>
+        <th>Tahun</th>
+        <th>Harga Sewa</th>
+        <th>Status</th>
+        <th>Aksi</th>
+    </tr>
+    {% for m in mobil %}
+    <tr>
+        <td>{{ m[0] }}</td>
+        <td>
+            {% if m[5] %}
+                <img src="{{ url_for('static', filename='uploads/' ~ m[5]) }}" width="90" style="border-radius:8px;">
+            {% else %}
+                <span style="color:#999;">(Tidak ada foto)</span>
+            {% endif %}
+        </td>
+        <td>{{ m[1] }}</td>
+        <td>{{ m[2] }}</td>
+        <td>{{ m[3] }}</td>
+        <td>{{ m[4] | rupiah }}</td>
+        <td>{{ m[6] }}</td>
+        <td>
+            <a href="{{ url_for('hapus_mobil', id=m[0]) }}" class="hapus">Hapus</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>Tambah Mobil Baru</h3>
+<form method="POST" action="{{ url_for('tambah_mobil') }}" enctype="multipart/form-data">
+    <input type="text" name="nama_mobil" placeholder="Nama Mobil" required>
+    <input type="text" name="merk" placeholder="Merk" required>
+    <input type="number" name="tahun" placeholder="Tahun" required>
+    <input type="number" name="harga" placeholder="Harga Sewa" required>
+    <input type="file" name="foto" accept="image/*" required>
+    <button type="submit">Tambah</button>
+</form>
+
+{% endblock %}

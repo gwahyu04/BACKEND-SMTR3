@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Data Rental</h2>
+
+<table border="1" cellpadding="6">
+    <tr>
+        <th>ID</th>
+        <th>Mobil</th>
+        <th>Pelanggan</th>
+        <th>Tanggal Pinjam</th>
+        <th>Tanggal Kembali</th>
+        <th>Total Harga</th>
+        <th>Status</th>
+    </tr>
+    {% for r in rental %}
+    <tr>
+        <td>{{ r[0] }}</td>
+        <td>{{ r[1] }}</td>
+        <td>{{ r[2] }}</td>
+        <td>{{ r[3] }}</td>
+        <td>{{ r[4] }}</td>
+        <td>{{ r[6] | rupiah }}</td>
+        <td>{{ r[8] }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="7" align="center">Belum ada data rental</td></tr>
+    {% endfor %}
+</table>
+
+<h3>Tambah Rental Baru</h3>
+<form method="POST" action="{{ url_for('tambah_rental') }}" id="rentalForm">
+    <label>Mobil:</label>
+    <select name="id_mobil" id="id_mobil" required>
+        <option value="">-- Pilih Mobil --</option>
+        {% for m in mobil %}
+            <option value="{{ m[0] }}" data-harga="{{ m[2] }}">
+                {{ m[1] }} - {{ m[2] | rupiah }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <label>ID Pelanggan:</label>
+    <input type="number" name="id_pelanggan" required>
+
+    <label>Tanggal Pinjam:</label>
+    <input type="date" id="tanggal_pinjam" name="tanggal_pinjam" required>
+
+    <label>Tanggal Kembali:</label>
+    <input type="date" id="tanggal_kembali" name="tanggal_kembali" required>
+
+    <label>Total Harga:</label>
+    <input type="number" id="total_harga" name="total_harga" readonly required>
+
+    <button type="submit">Tambah Rental</button>
+</form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const tanggalPinjam = document.getElementById('tanggal_pinjam');
+    const tanggalKembali = document.getElementById('tanggal_kembali');
+    const totalHarga = document.getElementById('total_harga');
+    const idMobil = document.getElementById('id_mobil');
+
+    function hitungTotal() {
+        const hargaPerHari = parseInt(idMobil.selectedOptions[0]?.dataset.harga || 0);
+        const tglPinjam = new Date(tanggalPinjam.value);
+        const tglKembali = new Date(tanggalKembali.value);
+
+        if (hargaPerHari && tanggalPinjam.value && tanggalKembali.value && tglKembali >= tglPinjam) {
+            const selisihHari = Math.ceil((tglKembali - tglPinjam) / (1000 * 60 * 60 * 24)) || 1;
+            const total = selisihHari * hargaPerHari;
+            totalHarga.value = total;
+        } else {
+            totalHarga.value = '';
+        }
+    }
+
+    tanggalPinjam.addEventListener('change', hitungTotal);
+    tanggalKembali.addEventListener('change', hitungTotal);
+    idMobil.addEventListener('change', hitungTotal);
+});
+</script>
+
+{% endblock %}

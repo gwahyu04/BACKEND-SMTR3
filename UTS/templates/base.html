@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Armanada Trevel Rental</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <h1 class="brand">Armanada Trevel Rental</h1>
+            <div class="menu">
+                <a href="{{ url_for('mobil') }}">Mobil</a>
+                <a href="{{ url_for('pelanggan') }}">Pelanggan</a>
+                <a href="{{ url_for('rental') }}">Rental</a>
+                <a href="{{ url_for('pengembalian') }}">Pengembalian</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, msg in messages %}
+                    <div class="flash {{ category }}">{{ msg }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>© 2025 Armanada Trevel Rental</p>
+    </footer>
+</body>
+</html>

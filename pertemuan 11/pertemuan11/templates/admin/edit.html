@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Mobil{% endblock %}
+
+{% block content %}
+<h1>Edit Mobil</h1>
+<form action="{{ url_for('admin_edit', id=stok.id) }}" method="POST" enctype="multipart/form-data">
+    <label>Nama Mobil:</label>
+    <input type="text" name="nama_mobil" value="{{ stok.nama_mobil }}" required>
+    <label>Merk:</label>
+    <input type="text" name="merk" value="{{ stok.merk }}" required>
+    <label>Harga Sewa:</label>
+    <input type="number" name="harga_sewa" value="{{ stok.harga_sewa }}" required>
+    <label>Status:</label>
+    <select name="status">
+        <option value="Tersedia" {% if stok.status == 'Tersedia' %}selected{% endif %}>Tersedia</option>
+        <option value="Tidak Tersedia" {% if stok.status == 'Tidak Tersedia' %}selected{% endif %}>Tidak Tersedia</option>
+    </select>
+    <label>Foto:</label>
+    <input type="file" name="foto">
+    <button type="submit">Simpan</button>
+</form>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Armada Mobil{% endblock %}
+
+{% block content %}
+<h1>Armada Mobil Tersedia</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nama Mobil</th>
+            <th>Merk</th>
+            <th>Harga Sewa</th>
+            <th>Status</th>
+            <th>Foto</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for mobil in armada %}
+        <tr>
+            <td>{{ mobil.nama_mobil }}</td>
+            <td>{{ mobil.merk }}</td>
+            <td>{{ mobil.harga_sewa | rupiah }}</td>
+            <td>{{ mobil.status }}</td>
+            <td>
+                {% if mobil.foto %}
+                <img src="{{ url_for('static', filename='uploads/' + mobil.foto) }}" alt="{{ mobil.nama_mobil }}" width="100">
+                {% else %}
+                Tidak Ada Foto
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

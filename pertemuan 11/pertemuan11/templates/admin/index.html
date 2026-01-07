@@ -1,0 +1,58 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h1>Admin Dashboard</h1>
+
+<p>
+    <a href="{{ url_for('admin_add') }}">+ Tambah Mobil</a>
+</p>
+
+<table border="1" cellpadding="10" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>Nama Mobil</th>
+            <th>Merk</th>
+            <th>Harga Sewa</th>
+            <th>Status</th>
+            <th>Foto</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if stoks %}
+            {% for stok in stoks %}
+            <tr>
+                <td>{{ stok.nama_mobil }}</td>
+                <td>{{ stok.merk }}</td>
+                <td>{{ stok.harga_sewa | rupiah }}</td>
+                <td>{{ stok.status }}</td>
+                <td>
+                    {% if stok.foto %}
+                        <img
+                            src="{{ url_for('static', filename='uploads/' ~ stok.foto) }}"
+                            alt="{{ stok.nama_mobil }}"
+                            width="100"
+                        >
+                    {% else %}
+                        <em>Tidak ada foto</em>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ url_for('admin_edit', id=stok.id) }}">Edit</a> |
+                    <a href="{{ url_for('admin_delete', id=stok.id) }}"
+                       onclick="return confirm('Yakin ingin menghapus data ini?')">
+                       Hapus
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="6" align="center">Data belum tersedia</td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+{% endblock %}

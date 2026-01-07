@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Tambah Mobil{% endblock %}
+
+{% block content %}
+<h1>Tambah Mobil</h1>
+<form action="{{ url_for('admin_add') }}" method="POST" enctype="multipart/form-data">
+    <label>Nama Mobil:</label>
+    <input type="text" name="nama_mobil" required>
+    <label>Merk:</label>
+    <input type="text" name="merk" required>
+    <label>Harga Sewa:</label>
+    <input type="number" name="harga_sewa" required>
+    <label>Status:</label>
+    <select name="status">
+        <option value="Tersedia">Tersedia</option>
+        <option value="Tidak Tersedia">Tidak Tersedia</option>
+    </select>
+    <label>Foto:</label>
+    <input type="file" name="foto">
+    <button type="submit">Tambah</button>
+</form>
+{% endblock %}

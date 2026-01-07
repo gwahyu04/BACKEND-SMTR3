@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Aplikasi Rental Mobil{% endblock %}</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/uploads/css/style.css">
+
+
+</head>
+<body>
+
+    <!-- HEADER / NAVBAR -->
+    <header class="navbar">
+        <div class="container nav-wrapper">
+            <div class="logo">
+                <a href="{{ url_for('beranda') }}">GoDrive</a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="{{ url_for('beranda') }}">Beranda</a></li>
+                    <li><a href="{{ url_for('armada') }}">Armada</a></li>
+                    <li><a href="{{ url_for('tentang') }}">Tentang</a></li>
+                    <li><a href="{{ url_for('kontak') }}">Kontak</a></li>
+                    <li><a href="{{ url_for('admin_index') }}" class="btn-admin">Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 GoDrive Rental Mobil. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

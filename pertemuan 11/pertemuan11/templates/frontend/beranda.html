@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Beranda{% endblock %}
+
+{% block content %}
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Sewa Mobil Mudah & Terpercaya</h1>
+        <p>Pilihan mobil lengkap, harga terjangkau, dan proses cepat.</p>
+        <a href="/mobil" class="btn-primary">Lihat Mobil</a>
+    </div>
+</section>
+
+<!-- KEUNGGULAN -->
+<section class="features">
+    <h2>Kenapa Pilih Kami?</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>🚗 Mobil Lengkap</h3>
+            <p>Dari city car hingga mobil keluarga tersedia.</p>
+        </div>
+        <div class="feature-card">
+            <h3>💰 Harga Terjangkau</h3>
+            <p>Harga transparan tanpa biaya tersembunyi.</p>
+        </div>
+        <div class="feature-card">
+            <h3>⚡ Proses Cepat</h3>
+            <p>Pemesanan mudah dan konfirmasi cepat.</p>
+        </div>
+    </div>
+</section>
+
+<!-- DAFTAR MOBIL -->
+<section class="cars">
+    <h2>Mobil Favorit</h2>
+    <div class="car-grid">
+        <div class="car-card">
+            <img src="{{ url_for('static', filename='img/avanza.jpg') }}" alt="Avanza">
+            <h3>Toyota Avanza</h3>
+            <p>Rp 350.000 / hari</p>
+            <a href="#" class="btn-secondary">Sewa Sekarang</a>
+        </div>
+
+        <div class="car-card">
+            <img src="{{ url_for('static', filename='img/brio.jpg') }}" alt="Brio">
+            <h3>Honda Brio</h3>
+            <p>Rp 300.000 / hari</p>
+            <a href="#" class="btn-secondary">Sewa Sekarang</a>
+        </div>
+
+        <div class="car-card">
+            <img src="{{ url_for('static', filename='img/innova.jpg') }}" alt="Innova">
+            <h3>Toyota Innova</h3>
+            <p>Rp 500.000 / hari</p>
+            <a href="#" class="btn-secondary">Sewa Sekarang</a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+    <h2>Siap Menyewa Mobil Sekarang?</h2>
+    <p>Hubungi kami dan dapatkan penawaran terbaik hari ini.</p>
+    <a href="/kontak" class="btn-primary">Hubungi Kami</a>
+</section>
+
+{% endblock %}

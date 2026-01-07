@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Edit Barang</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    padding: 30px;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    max-width: 500px;
+    margin: auto;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn-save {
+    background: #28a745;
+    color: white;
+}
+
+.btn-back {
+    background: #6c757d;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: inline-block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>Edit Barang UMKM</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <input type="text" name="kode" value="{{ barang.kode_barang }}" required>
+    <input type="text" name="nama" value="{{ barang.nama_barang }}" required>
+    <input type="number" name="harga" value="{{ barang.harga }}" required>
+    <input type="number" name="jumlah" value="{{ barang.jumlah }}" required>
+
+    <p>Gambar Lama:</p>
+    <img src="{{ url_for('static', filename='uploads/' + barang.gambar) }}" width="100">
+
+    <p>Ganti Gambar (opsional):</p>
+    <input type="file" name="gambar">
+
+    <br><br>
+    <button class="btn-save">Simpan Perubahan</button>
+    <a href="/" class="btn-back">Kembali</a>
+</form>
+</div>
+
+</body>
+</html>

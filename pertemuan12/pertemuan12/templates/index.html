@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Daftar Barang UMKM</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    padding: 20px;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-add {
+    background: #007bff;
+    color: white;
+    border-radius: 4px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin-top: 15px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background: #f1f1f1;
+}
+
+img {
+    width: 60px;
+}
+
+.btn-edit {
+    background: #ffc107;
+    color: black;
+    border-radius: 4px;
+}
+
+.btn-hapus {
+    background: #dc3545;
+    color: white;
+    border-radius: 4px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Daftar Barang UMKM</h2>
+
+<form action="/tambah" method="post" enctype="multipart/form-data">
+    <input type="text" name="kode" placeholder="Kode Barang" required>
+    <input type="text" name="nama" placeholder="Nama Barang" required>
+    <input type="number" name="harga" placeholder="Harga" required>
+    <input type="number" name="jumlah" placeholder="Jumlah" required>
+    <input type="file" name="gambar" required>
+    <button class="btn-add">Tambah Barang</button>
+</form>
+
+<table>
+<thead>
+<tr>
+    <th>Kode Barang</th>
+    <th>Nama Barang</th>
+    <th>Harga Barang</th>
+    <th>Jumlah Unit</th>
+    <th>Gambar</th>
+    <th>Aksi</th>
+</tr>
+</thead>
+
+<tbody>
+    {% for b in data %}
+    <tr>
+        <td>{{ b.kode_barang }}</td>
+        <td>{{ b.nama_barang }}</td>
+        <td>{{ b.harga }}</td>
+        <td>{{ b.jumlah }}</td>
+    
+        <!-- KOLOM GAMBAR -->
+        <td>
+            {% if b.gambar %}
+            <img src="{{ url_for('static', filename='uploads/' + b.gambar) }}">
+            {% else %}
+            <span>Tidak ada foto</span>
+            {% endif %}
+        </td>
+    
+        <!-- KOLOM AKSI -->
+        <td>
+            <a href="/edit/{{ b.id }}">
+                <button class="btn-edit">Edit</button>
+            </a>
+            <a href="/hapus/{{ b.id }}">
+                <button class="btn-hapus">Hapus</button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
